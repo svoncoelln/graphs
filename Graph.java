@@ -1,4 +1,6 @@
 import edu.princeton.cs.algs4.Bag;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class Graph {
     private int V;
@@ -7,15 +9,21 @@ public class Graph {
     Bag<Integer>[] g;
 
     public Graph(int v) {
-        g = new Bag<Integer>[v];
+        g = (Bag<Integer>[]) new Bag[v];
+    }
+
+    public void addEdge(int v, int w) {
+        g[v].add(w);
+        g[w].add(v);
+        E++;
     }
 
     public Graph(InputStream in) {
-        V = Integer.parseInt(in.nextLine());
-        g = new Bag<Integer>[V];
-        E = Integer.parseInt(in.nextLine());
+        Scanner scan = new Scanner(in);
+        V = scan.nextInt();
+        E = scan.nextInt();
         for (int i = 0; i < E; i++) {
-            addEdge(Integer.parseInt(in.next()), Integer.parseInt(in.next()));
+            addEdge(scan.nextInt(), scan.nextInt());
         }
     }
 }
