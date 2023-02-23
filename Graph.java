@@ -1,13 +1,12 @@
 import edu.princeton.cs.algs4.Bag;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Graph {
     private int V;
     private int E;
 
-    Bag<Integer>[] g;
+    private Bag<Integer>[] g;
 
     public Graph(int v) {
         g = (Bag<Integer>[]) new Bag[v];
@@ -17,6 +16,10 @@ public class Graph {
         Scanner scan = new Scanner(in);
         V = scan.nextInt();
         E = scan.nextInt();
+        g = (Bag<Integer>[]) new Bag[V];
+        for (int i = 0; i < V; i++) {
+            g[i] = new Bag<Integer>();
+        }
         while (scan.hasNext()) {
             addEdge(scan.nextInt(), scan.nextInt());
         }
@@ -30,12 +33,5 @@ public class Graph {
 
     public Iterable<Integer> adj(int v) {
         return g[v];
-    }
-    public static void main(String[] args) {
-        Graph g = new Graph(System.in);
-        ArrayList<Integer> seven = (ArrayList<Integer>) g.adj(7);
-        for (int i : seven) {
-            System.out.println(i);
-        }
     }
 }
